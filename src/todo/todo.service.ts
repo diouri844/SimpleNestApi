@@ -15,11 +15,19 @@ export class TodoService {
         }
     ];
     // let define some actions :
-    createTodo(todo: TodoItem): void { };
-    findTodo(critaire: string): TodoItem[] {
-        return [] as TodoItem[];
+    createTodo(todo: TodoItem): TodoItem[] {
+        this.TodoList.push(todo);
+        return this.TodoList;
+    };
+    findTodo(id: string): TodoItem {
+        return this.TodoList.filter(item => item.id === id)[0];
     };
     retriveAll(): TodoItem[] {
         return this.TodoList;
     };
+    removeItem(id: string): TodoItem[] {
+        return this.TodoList.filter(
+            item => item.id !== id
+        );
+    }
 };
