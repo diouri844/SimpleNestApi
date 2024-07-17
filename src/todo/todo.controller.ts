@@ -4,20 +4,29 @@ import { TodoService } from "./todo.service";
 import { TodoItem } from "./interfaces/todo.interface";
 
 
-@Controller("Todos")
+@Controller("todos")
 export class TodoController {
     constructor(private TodoProvider: TodoService) { };
     // time to define routes : 
     @Post()
     async createTodo(@Body() TodoPayload: TodoItem) {
-        this.TodoProvider.createTodo(TodoPayload);
+        return this.TodoProvider.createTodo(TodoPayload);
     };
-    @Get()
+    @Get("/all")
     async getTodoList() {
-        this.TodoProvider.retriveAll();
+        return {
+            message: "All todo retrived successfully",
+            data: this.TodoProvider.retriveAll()
+        };
     };
-    @Get("/:id")
+    @Get("/item/:id")
     async getTodoById(@Param() id: string) {
-        this.getTodoById(id);
+        console.log(id);
+        const res: TodoItem = this.TodoProvider.findTodo(id);
+        console.log(res);
+        return {
+            message: "Todo Item retrived successfully",
+            data: res
+        };
     }
 };
