@@ -1,7 +1,6 @@
 
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { TodoService } from "./todo.service";
-import { TodoItem } from "./interfaces/todo.interface";
 import { Todo } from "@prisma/client";
 
 @Controller("todos")
